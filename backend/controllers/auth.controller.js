@@ -169,11 +169,10 @@ export const googleCallback = (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+} catch (error) {
+  console.error("Google callback error:", error);
 
-    res.redirect("http://localhost:5173/dashboard");
-  } catch (error) {
-    console.error("Google callback error:", error);
-
-    res.redirect("http://localhost:5173/login");
-  }
+  res.redirect(`${process.env.FRONTEND_URL}/login`);
+}
 };
